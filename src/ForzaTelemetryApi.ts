@@ -25,7 +25,7 @@ class ForzaByteBuffer {
     this.buffer = buffer;
   }
   getByte() {
-    const val = this.buffer.readUInt8(this.offset);
+    const val = this.buffer.readInt8(this.offset);
     this.offset += 1;
     return val;
   }
@@ -284,7 +284,7 @@ export class ForzaTelemetryApi {
     this.steer = (this.buffer.getByte() & 0xff) * 100 / 127;
     this.normalizedDrivingLine = (this.buffer.getByte() & 0xff) * 100 / 127;
     this.normalizedAIBrakeDifference = (this.buffer.getByte() & 0xff) * 100 / 127;
-    if (this.isForza7Packet() || this.isForza8Packet()) {
+    if (this.isForza8Packet()) {
       this.tireWear.leftFront = this.buffer.getFloat() * 100;
       this.tireWear.rightFront = this.buffer.getFloat() * 100;
       this.tireWear.leftRear = this.buffer.getFloat() * 100;
@@ -322,8 +322,8 @@ export class ForzaTelemetryApi {
   isMotorsport() {
     return this.isForza7Packet() || this.isForza8Packet();
   }
-  formatDecimal(value: number) {
-    return value.toFixed(2);
+  formatDecimal(value: number): number {
+    return Number(value.toFixed(2));
   }
   toDrivetrain(value: number) {
     switch (value) {
