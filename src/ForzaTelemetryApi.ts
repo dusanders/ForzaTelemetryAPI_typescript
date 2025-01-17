@@ -1,55 +1,6 @@
+import { ForzaByteBuffer } from "./ByteBuffer";
+import { Log } from "./Log";
 import { RpmData, DirectionalData, TireData, CarInfo, Drivetrain, CarClass } from "./types";
-
-class Log {
-  e(tag: string, msg: string) {
-    console.error(this.formatString(tag, msg));
-  }
-  d(tag: string, msg: string) {
-    console.debug(this.formatString(tag, msg));
-  }
-  w(tag: string, msg: string) {
-    console.warn(this.formatString(tag, msg));
-  }
-  l(tag: string, msg: string) {
-    console.log(this.formatString(tag, msg))
-  }
-  private formatString(tag: string, msg: string) {
-    return `${tag} :: ${msg}`;
-  }
-}
-
-class ForzaByteBuffer {
-  buffer: Buffer;
-  private offset: number = 0;
-  constructor(buffer: Buffer) {
-    this.buffer = buffer;
-  }
-  getByte() {
-    const val = this.buffer.readInt8(this.offset);
-    this.offset += 1;
-    return val;
-  }
-  getInt() {
-    const val = this.buffer.readUInt32LE(this.offset);
-    this.offset += 4;
-    return val;
-  }
-  getLong() {
-    const val = this.buffer.readUint32LE(this.offset);
-    this.offset += 4;
-    return val;
-  }
-  getShort() {
-    const val = this.buffer.readUInt16LE(this.offset);
-    this.offset += 2;
-    return val;
-  }
-  getFloat() {
-    const val = this.buffer.readFloatLE(this.offset);
-    this.offset += 4;
-    return val;
-  }
-}
 
 export class ForzaTelemetryApi {
   private TAG: string = "ForzaTelemetryApi";
