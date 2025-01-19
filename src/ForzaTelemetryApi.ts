@@ -128,7 +128,7 @@ export class ForzaTelemetryApi {
     leftFront: 0,
     leftRear: 0,
     rightFront: 0,
-    rightRear: 0
+    rightRear: 0,
   };
   trackId: number = 0;
 
@@ -272,9 +272,6 @@ export class ForzaTelemetryApi {
   }
   isMotorsport() {
     return this.isForza7Packet() || this.isForza8Packet();
-  }
-  formatDecimal(value: number): number {
-    return Number(value.toFixed(2));
   }
   toDrivetrain(value: number) {
     switch (value) {
