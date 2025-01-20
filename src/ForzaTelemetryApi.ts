@@ -14,6 +14,7 @@ export class ForzaTelemetryApi {
   //#region Data Props 
 
   isRaceOn: boolean = false;
+  isOnTrack: boolean = false;
   timeStampMS: number = 0;
   rpmData: RpmData = {
     max: 0,
@@ -95,6 +96,13 @@ export class ForzaTelemetryApi {
     drivetrainType: 0
   }
   objectHit: number = 0;
+  /**
+   * Position of the car within the world.
+   * y values indicate elevation.
+   * To make a 2D top-down view of the track:
+   * x values would be x values - z values would be 
+   * considered y points
+   */
   position: DirectionalData = {
     x: 0, y: 0, z: 0
   }
@@ -121,7 +129,20 @@ export class ForzaTelemetryApi {
   clutch: number = 0;
   handbrake: number = 0;
   gear: number = 0;
+  /**
+   * Normalized value between 0 and 200
+   * 101.55 is center steering
+   * 0-101 is left steering
+   * 200-101 is right steering
+   */
   steer: number = 0;
+  /**
+   * This gives the position on track. 0 being center track,
+   * 0 - 99 deviation from center to the left
+   * 200 - 100 deviation from center to the right
+   * 101.55 is off track right side
+   * 100 is off track left side
+   */
   normalizedDrivingLine: number = 0;
   normalizedAIBrakeDifference: number = 0;
   tireWear: TireData = {
@@ -234,12 +255,14 @@ export class ForzaTelemetryApi {
     this.gear = (this.buffer.getByte() & 0xff);
     this.steer = (this.buffer.getByte() & 0xff) * 100 / 127;
     this.normalizedDrivingLine = (this.buffer.getByte() & 0xff) * 100 / 127;
+    this.isOnTrack = this.normalizedDrivingLine < 100 || this.normalizedDrivingLine > 101.6
     this.normalizedAIBrakeDifference = (this.buffer.getByte() & 0xff) * 100 / 127;
     if (this.isForza8Packet()) {
       this.tireWear.leftFront = this.buffer.getFloat() * 100;
       this.tireWear.rightFront = this.buffer.getFloat() * 100;
       this.tireWear.leftRear = this.buffer.getFloat() * 100;
       this.tireWear.rightRear = this.buffer.getFloat() * 100;
+      this.trackId = this.buffer.getInt();
     } else {
       this.tireWear.leftFront = 0;
       this.tireWear.rightFront = 0;
