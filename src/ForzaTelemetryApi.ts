@@ -155,7 +155,7 @@ export class ForzaTelemetryApi {
 
   //#endregion
 
-  constructor(buffLen: number, buffer: Buffer) {
+  constructor(buffLen: number, buffer: ArrayBuffer) {
     this.packetLength = buffLen;
     this.buffer = new ForzaByteBuffer(buffer);
     this.Log = new Log();
