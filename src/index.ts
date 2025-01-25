@@ -1,2 +1,2 @@
-export * from './ForzaTelemetryApi';
-export * from './types';
+export * from './ForzaTelemetryApi.js';
+export * from './types.js';

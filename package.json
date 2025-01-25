@@ -1,13 +1,14 @@
 {
+  "private": true,
   "name": "ForzaTelemetryApi",
   "version": "1.0.0",
   "description": "TypeScript library to implement ForzaTelemetryApi functionality",
   "main": "./dist/index.js",
   "author": "dusanders@gmail.com",
+  "type": "module",
   "license": "MIT",
-  "private": true,
   "scripts": {
-    "build": "npx tsc"
+    "build": "rm -rf dist && npx tsc"
   },
   "devDependencies": {
     "@types/node": "^22.10.5",

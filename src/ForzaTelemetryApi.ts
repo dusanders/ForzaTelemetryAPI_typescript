@@ -1,6 +1,6 @@
-import { ForzaByteBuffer } from "./ByteBuffer";
-import { Log } from "./Log";
-import { RpmData, DirectionalData, TireData, CarInfo, Drivetrain, CarClass } from "./types";
+import { ForzaByteBuffer } from "./ByteBuffer.js";
+import { Log } from "./Log.js";
+import { RpmData, DirectionalData, TireData, CarInfo, Drivetrain, CarClass } from "./types.js";
 
 export class ForzaTelemetryApi {
   private TAG: string = "ForzaTelemetryApi";
