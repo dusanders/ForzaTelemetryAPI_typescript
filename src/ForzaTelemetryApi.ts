@@ -155,7 +155,7 @@ export class ForzaTelemetryApi {
 
   //#endregion
 
-  constructor(buffLen: number, buffer: ArrayBuffer) {
+  constructor(buffLen: number, buffer: Buffer) {
     this.packetLength = buffLen;
     this.buffer = new ForzaByteBuffer(buffer);
     this.Log = new Log();
@@ -253,10 +253,10 @@ export class ForzaTelemetryApi {
     this.clutch = (this.buffer.getByte() & 0xff) * 100 / 255;
     this.handbrake = (this.buffer.getByte() & 0xff) * 100 / 255;
     this.gear = (this.buffer.getByte() & 0xff);
-    this.steer = (this.buffer.getByte() & 0xff) * 100 / 127;
-    this.normalizedDrivingLine = (this.buffer.getByte() & 0xff) * 100 / 127;
+    this.steer = (this.buffer.getByte());
+    this.normalizedDrivingLine = (this.buffer.getByte());
     this.isOnTrack = this.normalizedDrivingLine < 100 || this.normalizedDrivingLine > 101.6
-    this.normalizedAIBrakeDifference = (this.buffer.getByte() & 0xff) * 100 / 127;
+    this.normalizedAIBrakeDifference = (this.buffer.getByte());
     if (this.isForza8Packet()) {
       this.tireWear.leftFront = this.buffer.getFloat() * 100;
       this.tireWear.rightFront = this.buffer.getFloat() * 100;

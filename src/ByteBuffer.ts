@@ -7,9 +7,8 @@ export class ForzaByteBuffer {
   private tag: string = 'ForzaByteBuffer';
   private buffer: DataView;
   private offset: number = 0;
-  constructor(buffer: ArrayBuffer) {
-    this.buffer = new DataView(buffer);
-    this.buffer.getInt16;
+  constructor(buffer: Buffer) {
+    this.buffer = new DataView(buffer.buffer);
   }
   getByte() {
     if(this.offset >= this.buffer.byteLength) {
