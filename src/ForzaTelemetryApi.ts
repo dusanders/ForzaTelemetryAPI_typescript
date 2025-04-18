@@ -1,4 +1,6 @@
 import { ForzaByteBuffer } from "./ByteBuffer.js";
+import { FM8_CarLookup } from "./FM8_carList.js";
+import { FM8_trackList } from "./FM8_trackList.js";
 import { Log } from "./Log.js";
 import { getDefaultTelemetryData, ITelemetryData } from "./TelemetryData.js";
 import { RpmData, DirectionalData, TireData, CarInfo, Drivetrain, CarClass, PacketLengths, GameType } from "./types.js";
@@ -127,7 +129,12 @@ export class ForzaTelemetryApi {
     }
     return data;
   }
-
+  static Motorsport_8_trackInfo(id: number) {
+    return FM8_trackList.getTrackInfo(id);
+  }
+  static Motorsport_8_carInfo(id: number) {
+    return FM8_CarLookup.getCarInfo(id);
+  }
   static toCelsius(value: number) {
     return ((value - 32) * 5) / 9;
   }
@@ -140,7 +147,6 @@ export class ForzaTelemetryApi {
   static getHorsepower(power: number): number {
     return power * 0.00134102;
   }
-
   static toDrivetrain(value: number) {
     switch (value) {
       case 0: return Drivetrain.FWD;
@@ -149,7 +155,6 @@ export class ForzaTelemetryApi {
     }
     return Drivetrain.FWD;
   }
-
   static toCarClass(value: number, gameType: GameType) {
     switch (value) {
       case 0: return (gameType != GameType.HORIZON)

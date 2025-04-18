@@ -1,21 +1,14 @@
 export interface FM8_TrackInfo {
-  trackOrdinal: number;
-  circuit: string;
-  location: string;
-  iocCode: string;
-  track: string;
-  lengthInKm: number;
+  TrackOrdinal: number;
+  Circuit: string;
+  Location: string;
+  IOC_Code: string;
+  Track: string;
+  Length_in_km: number;
 }
 export class FM8_trackList {
   private static trackMap: { 
-    [key: string]: { 
-      TrackOrdinal: number;
-      Circuit: string;
-      Location: string;
-      IOC_Code: string;
-      Track: string;
-      Length_in_km: number;
-    } 
+    [key: string]: FM8_TrackInfo
   } = {
     "0": {
       "TrackOrdinal": 0,
@@ -588,14 +581,6 @@ export class FM8_trackList {
   }
   static getTrackInfo(trackId: number): FM8_TrackInfo | undefined {
     const track = this.trackMap[trackId];
-    if(!track) return undefined;
-    return {
-      trackOrdinal: track.TrackOrdinal,
-      circuit: track.Circuit,
-      location: track.Location,
-      iocCode: track.IOC_Code,
-      track: track.Track,
-      lengthInKm: track.Length_in_km
-    };
+    return track;
   }
 }
