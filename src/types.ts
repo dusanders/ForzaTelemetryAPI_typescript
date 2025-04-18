@@ -28,3 +28,14 @@ export enum CarClass {
 export enum Drivetrain {
   FWD, RWD, AWD
 }
+export enum GameType {
+  UNKNOWN,
+  HORIZON,
+  MOTORSPORT_7,
+  MOTORSPORT_8,
+}
+export enum PacketLengths {
+    HORIZON = 324,
+    MOTORSPORT_7 = 311,
+    MOTORSPORT_8 = 331,
+}
