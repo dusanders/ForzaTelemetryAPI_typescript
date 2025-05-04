@@ -11,48 +11,68 @@ export class ForzaByteBuffer {
     this.buffer = new DataView(buffer.buffer);
   }
   getByte() {
-    if(this.offset >= this.buffer.byteLength) {
-      console.warn(`${this.tag} :: OFFSET ${this.offset} OUT-OF-BOUND ON STREAM LENGTH ${this.buffer.byteLength} !!! RETURNING 0 !!!!`);
-      return 0;
+    try {
+      if (this.offset >= this.buffer.byteLength) {
+        console.warn(`${this.tag} :: OFFSET ${this.offset} OUT-OF-BOUND ON STREAM LENGTH ${this.buffer.byteLength} !!! RETURNING 0 !!!!`);
+        return 0;
+      }
+      const val = this.buffer.getInt8(this.offset);
+      this.offset += 1;
+      return val;
+    } catch (error: Error | unknown) {
+      throw new Error('Failed to parse byte');
     }
-    const val = this.buffer.getInt8(this.offset);
-    this.offset += 1;
-    return val;
   }
   getInt() {
-    if(this.offset >= this.buffer.byteLength) {
-      console.warn(`${this.tag} :: OFFSET ${this.offset} OUT-OF-BOUND ON STREAM LENGTH ${this.buffer.byteLength} !!! RETURNING 0 !!!!`);
-      return 0;
+    try {
+      if (this.offset >= this.buffer.byteLength) {
+        console.warn(`${this.tag} :: OFFSET ${this.offset} OUT-OF-BOUND ON STREAM LENGTH ${this.buffer.byteLength} !!! RETURNING 0 !!!!`);
+        return 0;
+      }
+      const val = this.buffer.getUint32(this.offset, true);
+      this.offset += 4;
+      return val;
+    } catch (error: unknown) {
+      throw new Error(`Failed to parse Int`);
     }
-    const val = this.buffer.getUint32(this.offset, true);
-    this.offset += 4;
-    return val;
   }
   getLong() {
-    if(this.offset >= this.buffer.byteLength) {
-      console.warn(`${this.tag} :: OFFSET ${this.offset} OUT-OF-BOUND ON STREAM LENGTH ${this.buffer.byteLength} !!! RETURNING 0 !!!!`);
-      return 0;
+    try {
+      if (this.offset >= this.buffer.byteLength) {
+        console.warn(`${this.tag} :: OFFSET ${this.offset} OUT-OF-BOUND ON STREAM LENGTH ${this.buffer.byteLength} !!! RETURNING 0 !!!!`);
+        return 0;
+      }
+      const val = this.buffer.getUint32(this.offset, true);
+      this.offset += 4;
+      return val;
+    } catch (error: unknown) {
+      throw new Error(`Failed to parse Long`);
     }
-    const val = this.buffer.getUint32(this.offset, true);
-    this.offset += 4;
-    return val;
   }
   getShort() {
-    if(this.offset >= this.buffer.byteLength) {
-      console.warn(`${this.tag} :: OFFSET ${this.offset} OUT-OF-BOUND ON STREAM LENGTH ${this.buffer.byteLength} !!! RETURNING 0 !!!!`);
-      return 0;
+    try {
+      if (this.offset >= this.buffer.byteLength) {
+        console.warn(`${this.tag} :: OFFSET ${this.offset} OUT-OF-BOUND ON STREAM LENGTH ${this.buffer.byteLength} !!! RETURNING 0 !!!!`);
+        return 0;
+      }
+      const val = this.buffer.getUint16(this.offset, true);
+      this.offset += 2;
+      return val;
+    } catch (error: unknown) {
+      throw new Error(`Failed to parse Short`);
     }
-    const val = this.buffer.getUint16(this.offset, true);
-    this.offset += 2;
-    return val;
   }
   getFloat() {
-    if(this.offset >= this.buffer.byteLength) {
-      console.warn(`${this.tag} :: OFFSET ${this.offset} OUT-OF-BOUND ON STREAM LENGTH ${this.buffer.byteLength} !!! RETURNING 0 !!!!`);
-      return 0;
+    try {
+      if (this.offset >= this.buffer.byteLength) {
+        console.warn(`${this.tag} :: OFFSET ${this.offset} OUT-OF-BOUND ON STREAM LENGTH ${this.buffer.byteLength} !!! RETURNING 0 !!!!`);
+        return 0;
+      }
+      const val = this.buffer.getFloat32(this.offset, true);
+      this.offset += 4;
+      return val;
+    } catch (error) {
+      throw new Error(`Failed to parse Float`);
     }
-    const val = this.buffer.getFloat32(this.offset, true);
-    this.offset += 4;
-    return val;
   }
 }
