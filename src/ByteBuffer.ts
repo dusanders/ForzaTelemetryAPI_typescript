@@ -1,3 +1,4 @@
+import { Log } from "./Log";
 
 /**
  * Class to handle parsing a byte array similar to Java's implementation that 
@@ -13,7 +14,7 @@ export class ForzaByteBuffer {
   getByte() {
     try {
       if (this.offset >= this.buffer.byteLength) {
-        console.warn(`${this.tag} :: OFFSET ${this.offset} OUT-OF-BOUND ON STREAM LENGTH ${this.buffer.byteLength} !!! RETURNING 0 !!!!`);
+        Log.w(this.tag, `OFFSET ${this.offset} OUT-OF-BOUND ON STREAM LENGTH ${this.buffer.byteLength} !!! RETURNING 0 !!!!`);
         return 0;
       }
       const val = this.buffer.getInt8(this.offset);
@@ -26,7 +27,7 @@ export class ForzaByteBuffer {
   getInt() {
     try {
       if (this.offset >= this.buffer.byteLength) {
-        console.warn(`${this.tag} :: OFFSET ${this.offset} OUT-OF-BOUND ON STREAM LENGTH ${this.buffer.byteLength} !!! RETURNING 0 !!!!`);
+        console.warn(this.tag, `OFFSET ${this.offset} OUT-OF-BOUND ON STREAM LENGTH ${this.buffer.byteLength} !!! RETURNING 0 !!!!`);
         return 0;
       }
       const val = this.buffer.getUint32(this.offset, true);
@@ -39,7 +40,7 @@ export class ForzaByteBuffer {
   getLong() {
     try {
       if (this.offset >= this.buffer.byteLength) {
-        console.warn(`${this.tag} :: OFFSET ${this.offset} OUT-OF-BOUND ON STREAM LENGTH ${this.buffer.byteLength} !!! RETURNING 0 !!!!`);
+        console.warn(this.tag, `OFFSET ${this.offset} OUT-OF-BOUND ON STREAM LENGTH ${this.buffer.byteLength} !!! RETURNING 0 !!!!`);
         return 0;
       }
       const val = this.buffer.getUint32(this.offset, true);
@@ -52,7 +53,7 @@ export class ForzaByteBuffer {
   getShort() {
     try {
       if (this.offset >= this.buffer.byteLength) {
-        console.warn(`${this.tag} :: OFFSET ${this.offset} OUT-OF-BOUND ON STREAM LENGTH ${this.buffer.byteLength} !!! RETURNING 0 !!!!`);
+        console.warn(this.tag, `OFFSET ${this.offset} OUT-OF-BOUND ON STREAM LENGTH ${this.buffer.byteLength} !!! RETURNING 0 !!!!`);
         return 0;
       }
       const val = this.buffer.getUint16(this.offset, true);
@@ -65,7 +66,7 @@ export class ForzaByteBuffer {
   getFloat() {
     try {
       if (this.offset >= this.buffer.byteLength) {
-        console.warn(`${this.tag} :: OFFSET ${this.offset} OUT-OF-BOUND ON STREAM LENGTH ${this.buffer.byteLength} !!! RETURNING 0 !!!!`);
+        console.warn(this.tag, `OFFSET ${this.offset} OUT-OF-BOUND ON STREAM LENGTH ${this.buffer.byteLength} !!! RETURNING 0 !!!!`);
         return 0;
       }
       const val = this.buffer.getFloat32(this.offset, true);

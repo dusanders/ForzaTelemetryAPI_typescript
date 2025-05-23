@@ -3,19 +3,19 @@
  * Class to act as logger
  */
 export class Log {
-  e(tag: string, msg: string) {
-    console.error(this.formatString(tag, msg));
+  static e(tag: string, msg: string) {
+    console.error(Log.formatString(tag, msg));
   }
-  d(tag: string, msg: string) {
-    console.debug(this.formatString(tag, msg));
+  static d(tag: string, msg: string) {
+    console.debug(Log.formatString(tag, msg));
   }
-  w(tag: string, msg: string) {
-    console.warn(this.formatString(tag, msg));
+  static w(tag: string, msg: string) {
+    console.warn(Log.formatString(tag, msg));
   }
-  l(tag: string, msg: string) {
-    console.log(this.formatString(tag, msg))
+  static l(tag: string, msg: string) {
+    console.log(Log.formatString(tag, msg))
   }
-  private formatString(tag: string, msg: string) {
+  private static formatString(tag: string, msg: string) {
     return `${tag} :: ${msg}`;
   }
 }

@@ -1,13 +1,11 @@
 import { ForzaByteBuffer } from "./ByteBuffer.js";
 import { FM8_CarLookup } from "./FM8_carList.js";
 import { FM8_trackList } from "./FM8_trackList.js";
-import { Log } from "./Log.js";
 import { getDefaultTelemetryData, ITelemetryData } from "./TelemetryData.js";
 import { Drivetrain, CarClass, PacketLengths, GameType } from "./types.js";
 
 export class ForzaTelemetryApi {
   private static TAG: string = "ForzaTelemetryApi";
-  private static Log: Log;
 
   static parseData(buffLen: number, rawBuffer: Buffer): ITelemetryData {
     const data = getDefaultTelemetryData();
