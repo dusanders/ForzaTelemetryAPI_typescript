@@ -230,20 +230,62 @@ export interface ITelemetryData {
   isOnTrack: boolean;
   timeStampMS: number;
   rpmData: RpmData;
+  /**
+   * Vehicle local space: x is right, y is up, z is forward.
+   */
   acceleration: DirectionalData;
+  /**
+   * Vehicle local space: x is right, y is up, z is forward.
+   */
   velocity: DirectionalData;
+  /**
+   * Vehicle local space: x is pitch, y is yaw, z is roll.
+   */
   angularVelocity: DirectionalData;
   yaw: number;
   pitch: number;
   roll: number;
+  /**
+   * Normalized suspension travel for each wheel.
+   * Values are between 0 and 1, where 0 is fully extended and 1 is fully compressed.
+   */
   normalizedSuspensionTravel: TireData;
+  /**
+   * Slip ratio for each tire.
+   * Values are between 0 and 1, where 0 is no slip and 1 is full slip.
+   */
   tireSlipRatio: TireData;
+  /**
+   * Rotational speed in radians per second for each wheel.
+   */
   wheelRotationSpeed: TireData;
+  /**
+   * Indicates if each wheel is on a rumble strip.
+   */
   wheelOnRumbleStrip: TireData;
+  /**
+   * Depth of water each wheel is in.
+   * Values are between 0 and 1, where 0 is no water and 1 is fully submerged.
+   */
   wheelInPuddleDepth: TireData;
+  /**
+   * Surface rumble for each wheel.
+   * Usually for rumble controllers
+   */
   surfaceRumble: TireData;
+  /**
+   * Slip angle for each tire.
+   * Values are in degrees, where 0 is no slip and higher values indicate more slip.
+   */
   tireSlipAngle: TireData;
+  /**
+   * Combined slip for each tire.
+   * Values are between 0 and 1, where 0 is no slip and 1 is full slip.
+   */
   tireCombinedSlip: TireData;
+  /**
+   * Suspension travel in meters for each wheel.
+   */
   suspensionTravelMeters: TireData;
   carInfo: CarInfo;
   objectHit: number;
